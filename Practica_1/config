@@ -3,11 +3,14 @@ User: grupo02
 Pass: grupo02
 
 --------------
+
 Red wifi
 SSID: RaspberryPiLab
 Pass: robopi2015
 
 -------------------
+
+NETWORK
 
 robopi02
 
@@ -24,3 +27,27 @@ Mask: 255.255.255.0
 GW:   192.168.1.1
 DNS1: 8.8.8.8
 DNS2: 8.8.8.4
+
+-------------------
+
+C (programming language)
+
+Ejercicio1: Hello World
+
+Código:
+
+#include <stdio.h>
+int main() {
+	printf("Hello world");
+	return 0;
+}
+
+
+Comandos:
+touch programa.c			->	Crear archivo
+nano programa.c				->	Editar archivo
+gcc -Wall programa.c -o programa	->	Compila en C el archivo programa.c
+g++ -Wall programa.c -o programa	->	Compila en C++ el archivo programa.c
+./programa				->	Ejecuta el programa
+
+
