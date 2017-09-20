@@ -1,0 +1,26 @@
+
+User: grupo02
+Pass: grupo02
+
+--------------
+Red wifi
+SSID: RaspberryPiLab
+Pass: robopi2015
+
+-------------------
+
+robopi02
+
+IP:   192.168.1.102
+Mask: 255.255.255.0
+GW:   192.168.1.1
+DNS1: 8.8.8.8
+DNS2: 8.8.8.4
+
+PC
+
+IP:   192.168.1.132
+Mask: 255.255.255.0
+GW:   192.168.1.1
+DNS1: 8.8.8.8
+DNS2: 8.8.8.4
