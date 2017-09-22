@@ -50,4 +50,7 @@ gcc -Wall programa.c -o programa	->	Compila en C el archivo programa.c
 g++ -Wall programa.c -o programa	->	Compila en C++ el archivo programa.c
 ./programa				->	Ejecuta el programa
 
+----------------------------
+
+Netbeans -> Project properties -> Debug libraries: -lwiringPi
 
