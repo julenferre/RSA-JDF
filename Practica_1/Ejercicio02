@@ -1,0 +1,23 @@
+/* 
+ * File:   main.cpp
+ * Author: jdiez030
+ *
+ * Created on 27 de septiembre de 2017, 15:51
+ */
+
+#include <cstdlib>
+#include <stdlib.h>
+#include <unistd.h>
+
+using namespace std;
+
+/*
+ * 
+ */
+int main(int argc, char** argv) {
+    system("echo 1 > /sys/class/gpio/gpio4/value");
+    sleep(3);
+    system("echo 0 > /sys/class/gpio/gpio4/value");
+    return 0;
+}
+
