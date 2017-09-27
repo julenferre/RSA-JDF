@@ -1,0 +1,18 @@
+Ejercicio 1 - 2017/09/27
+
+
+1) Activar el pin correspondiente. (En este caso, el 4)
+
+~$ echo 4 > /sys/class/gpio/export
+
+
+2) A continuación hay que configurarlo para que se comporte como pin de entrada o salida (in/out)
+
+~$ echo out > /sys/class/gpio/gpio4/direction
+
+
+3) Para activarlo, hacer un echo con el valor 1 a la siguiente dirección
+
+~$ echo 1 > /sys/class/gpio/gpio4/value
+
+Para apagarlo, echo 0
