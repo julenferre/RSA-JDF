@@ -1,0 +1,36 @@
+/* 
+ * File:   main.cpp
+ * Author: jferrero005
+ *
+ * Created on 29 de septiembre de 2017, 18:11
+ */
+
+#include <cstdlib>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+ 
+int main(int argc, char** argv) {
+    
+    FILE * f;
+    
+    char valor;
+    
+    while (true) {       
+        
+        f = fopen("/sys/class/gpio/gpio15/value", "r");        
+        valor = fgetc(f);        
+        fclose(f);
+                
+        if (valor == '0') {
+            system("echo 1 > /sys/class/gpio/gpio14/value");
+        }
+        else {
+            system("echo 0 > /sys/class/gpio/gpio14/value");
+        }
+    }
+    
+    return 0;
+}
