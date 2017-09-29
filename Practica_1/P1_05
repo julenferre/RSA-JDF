@@ -1,42 +1,37 @@
 /* 
  * File:   main.cpp
- * Author: jdiez030
+ * Author: jferrero005
  *
- * Created on 27 de septiembre de 2017, 15:51
+ * Created on 29 de septiembre de 2017, 18:11
  */
 
 #include <cstdlib>
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
-
-/*
- * 
- */
+ 
 int main(int argc, char** argv) {
-    int valor;
+    
+    FILE * f;
+    
     bool pulsado = false;
     bool on = false;
-
-    valor = system("cat /sys/class/gpio/gpio3/value");
-    system("echo ''");
-    while(valor == 1){
-        system("echo 1 > /sys/class/gpio/gpio4/value");
-        system("echo 'Sigo dentro'");
-        valor = system("cat /sys/class/gpio/gpio3/value");
-        system("echo 'Nuevo valor'");
-    }
-    system("echo 0 > /sys/class/gpio/gpio4/value");
-    system("echo 'Terminado'");
     
-    /*while (true) {
-        valor = system("cat /sys/class/gpio/gpio3/value");
-        if (valor == 0) {
+    char valor;
+    
+    while (true) {       
+        
+        f = fopen("/sys/class/gpio/gpio15/value", "r");        
+        valor = fgetc(f);        
+        fclose(f);
+                
+        if (valor == '0') {
             pulsado = true;            
         }
         
-        if(valor == 1 && pulsado){
+        if(valor == '1' && pulsado){
             if (on) {
                 on = false;
             } else {
@@ -45,22 +40,14 @@ int main(int argc, char** argv) {
             pulsado = false;
         }
         
-        if (valor == 0) {
-            on = true;
-        } else {
-            on = false;
-        }
-        
         if (on) {
-            system("echo 1 > /sys/class/gpio/gpio4/value");
-            //sleep(1);
-            //system("echo 0 > /sys/class/gpio/gpio4/value");
-            //sleep(1);
-        } else {
-            system("echo 0 > /sys/class/gpio/gpio4/value");
+            system("echo 1 > /sys/class/gpio/gpio14/value");
         }
-    }*/
-
+        else {
+            system("echo 0 > /sys/class/gpio/gpio14/value");
+        }
+    }    
+    
     return 0;
 }
 
