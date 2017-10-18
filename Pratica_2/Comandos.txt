@@ -1,0 +1,30 @@
+/***********/
+Pone el robot en el modo completo (full)
+128 132
+Para ejecutar una orden una vez
+153
+/***********/
+
+Activar el LED de PLAY: 
+128 132 139 2 0 0
+
+Leer el estado del sensor de desnivel de la izquierda: (observar cómo cambia la respuesta cuando se levanta el robot)
+128 142 9 
+
+Para hacer música con iRobot: enviar estos conjuntos de comandos por separado:
+- 128 132 (Pone el robot en el modo completo (full))
+- 140 0 4 62 12 66 12 69 12 74 36 (define la canción)
+- 141 0 (toca la canción)
+
+Para hacer avanzar hacia adelante al iRobot: 128 131 137 0 100 128 0
+Para detener al iRobot: 128 131 137 0 0 0 0
+
+Drive 40 cm and stop:
+152 13 137 1 44 128 0 156 1 144 137 0 0 0 0
+
+Toggle led on bump:
+152 17 158 5 158 251 139 2 0 0 158 5 158 251 139 0 0 0 153
+
+Drive in a square forever:
+152 17 137 1 44 128 0 156 1 144 137 1 44 0 1 157 0 90 153
+
