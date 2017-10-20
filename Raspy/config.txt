@@ -52,5 +52,7 @@ g++ -Wall programa.c -o programa	->	Compila en C++ el archivo programa.c
 
 ----------------------------
 
-Netbeans -> Project properties -> Debug libraries: -lwiringPi
+Compilador C -> C Standard: C11
+Compilador C++ -> C Standard: C++11
+Netbeans -> Project properties -> Debug libraries -> Add option...: -lwiringPi
 
