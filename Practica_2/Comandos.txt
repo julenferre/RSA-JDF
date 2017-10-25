@@ -35,5 +35,8 @@ Drive in a square forever:
 Avanzar 1500 mm a velocidad de 350mm/s
 152 13 137 1 94 128 0 156 5 220 137 0 0 0 0
 
-Avanzar 4'3 seg a velocidad de 350mm/s ( = 1500mm de distancia)
+Avanzar 4'4 seg a velocidad de 350mm/s ( = 1500mm de distancia)
 152 12 137 1 94 128 0 155 43 137 0 0 0 0
+
+Dibujar un cuadrado (120cm * lado) (350mm/s)
+152 69 137 1 94 128 0 156 4 176 137 1 94 255 255 157 255 166 137 1 94 128 0 156 4 176 137 1 94 255 255 157 255 166 137 1 94 128 0 156 4 176 137 1 94 255 255 157 255 166 137 1 94 128 0 156 4 176 137 1 94 255 255 157 255 166 137 0 0 0 0
