@@ -1,4 +1,8 @@
-﻿/*Práctica 2.2*/
+﻿Avanzar 1500 mm a velocidad de 350mm/s
+152 13 137 1 94 128 0 156 5 220 137 0 0 0 0
+
+Avanzar 4'4 seg a velocidad de 350mm/s ( = 1500mm de distancia)
+152 12 137 1 94 128 0 155 44 137 0 0 0 0
 
 Dibujar un cuadrado (120cm * lado) (350mm/s) (por distancia: 1200mm) (giro a la dcha)
 152 69 
@@ -36,8 +40,8 @@ Dibujar un cuadrado (120cm * lado) (350mm/s) (por tiempo: 34,2 decimas) (giro a 
 
 DR - Dibujar un cuadrado (200cm * lado) (350mm/s) (por distancia:2000mm) (giro a la izqda)
 152 69 
-137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 82 
-137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 82 
-137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 82 
-137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 82 
+137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 81 
+137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 81 
+137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 81 
+137 1 94 128 0 156 7 200 137 1 94 0 1 157 0 81 
 137 0 0 0 0 153 -1
