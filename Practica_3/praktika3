@@ -13,13 +13,12 @@ using namespace std;
 int main(int argc, char** argv) {
 
     int sensor_value = 0;
-    int sensor_value2 = 0;
 
     // Creamos un objeto robot
     IRobotConnection robot(COM);
     
     // Activamos el Verbose Mode
-    robot.setVerboseMode(true);
+    robot.setVerboseMode(false);
     
     // Iniciamos la conexion...
     cout << "Connecting... ";
@@ -40,14 +39,14 @@ int main(int argc, char** argv) {
     robot.full();
     //delay(500);
 
-    /*// Comprobamos el estado del sensor BUMPERS y WHEELDROPS
-    int i=0;
+    // Comprobamos el estado del sensor BUMPERS y WHEELDROPS
+    /*int i= 0;
     cout << "Comprobar el estado del sensor choque y caida de ruedas en 2 seg" << endl;
     delay(2000);
     robot.song(1,2,"64 10");
     robot.song(2,2,"80 10");
     robot.song(3,2,"100 10");
-    while(i<30){        
+    while(i < 30){        
         sensor_value = robot.updateSensor(iRobotSensors::BUMPERS_AND_WHEELDROPS);
         cout << "Valor: " << +sensor_value << endl;
         if (sensor_value != 0 && sensor_value < 4) {
@@ -55,21 +54,83 @@ int main(int argc, char** argv) {
         }
         
         if(sensor_value == 4) {
-            robot.leds(3, 0, 255);
-            robot.leds(1, 0, 0);
+            robot.leds(0, 0, 255);
         } else if (sensor_value == 8) {
-            robot.leds(3, 0, 0);
-            robot.leds(1, 0, 255);
+            robot.leds(2, 0, 255);
         } else if (sensor_value == 16) {
-            robot.leds(3, 255, 255);
-            robot.leds(1, 255, 255);
-        }
+            robot.leds(8, 0, 255);
+        } else{
+            robot.leds(0, 0, 0);
+        } 
         i++;
-        delay(1000);   
+        delay(1000);
     }*/
     
+    /*int i = 0;
+    
+    while(i<40) {
+        sensor_value = robot.updateSensor(iRobotSensors::CLIFFRIGHTSIGNAL);
+        cout << "Valor: " << +sensor_value << endl;
+        i++;
+        delay(1000);
+    }*/
+    
+    
+   /* int i = 0, media = 0;
+    
+    while(i<5) {
+        sensor_value = robot.updateSensor(iRobotSensors::CLIFFLEFTSIGNAL);
+        cout << "Valor LEFT: " << +sensor_value << endl;
+        i++;
+        media += sensor_value;
+        delay(1000);
+    }
+    cout << "Media LEFT: " << + (media/5) << endl;
+    media = 0;
+    i = 0;
+    delay(3000);
+    while(i<5) {
+        sensor_value = robot.updateSensor(iRobotSensors::CLIFFFRONTLEFTSIGNAL);
+        cout << "Valor FRONT LEFT: " << +sensor_value << endl;
+        i++;
+        media += sensor_value;
+        delay(1000);
+    }
+    cout << "Media FRONT LEFT: " << + (media/5) << endl;
+    media = 0;
+    i = 0;
+    delay(3000);
+    while(i<5) {
+        sensor_value = robot.updateSensor(iRobotSensors::CLIFFFRONTRIGHTSIGNAL);
+        cout << "Valor FRONT RIGHT: " << +sensor_value << endl;
+        i++;
+        media += sensor_value;
+        delay(1000);
+    }
+    cout << "Media FRONT RIGHT: " << + (media/5) << endl;
+    media = 0;
+    i = 0;
+    delay(3000);
+    while(i<5) {
+        sensor_value = robot.updateSensor(iRobotSensors::CLIFFRIGHTSIGNAL);
+        cout << "Valor RIGHT: " << +sensor_value << endl;
+        i++;
+        media += sensor_value;
+        delay(1000);
+    }
+    cout << "Media RIGHT: " << + (media/5) << endl;*/
+    
+    int i = 0;
+    
+    while(i < 40) {
+        sensor_value = robot.updateSensor(iRobotSensors::WALL);
+        cout << "Valor WALL: " << +sensor_value << endl;
+        i++;
+        delay(500);
+    }
+    
 // Comprobamos el estado del sensor CLIFFLEFT
-    int i=0;
+/*    int i=0;
     int cintaMin=900, cintaMax=0, cintaSum=0, cintaCont=0, baldoMin=90000, baldoMax=0, baldoSum=0, baldoCont=0;
     cout << "Comprobar el estado del sensor CLIFF LEFT en 2 seg" << endl;
     delay(2000);
@@ -116,7 +177,7 @@ int main(int argc, char** argv) {
             return(0);
         }
         
-    }
+    }*/
     
     return EXIT_SUCCESS;
 }
