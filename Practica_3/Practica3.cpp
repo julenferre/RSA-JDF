@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
     robot.full();
     //delay(500);
 
+	/* 3.1. Calibración de sensores de choque y caída de ruedas (Bumps & WheelDrops)*/
     // Comprobamos el estado del sensor BUMPERS y WHEELDROPS
     /*int i= 0;
     cout << "Comprobar el estado del sensor choque y caida de ruedas en 2 seg" << endl;
@@ -68,6 +69,7 @@ int main(int argc, char** argv) {
     
     /*int i = 0;
     
+	/*3.2. Calibración de sensores de barranco (Cliffs Signal):*/
     while(i<40) {
         sensor_value = robot.updateSensor(iRobotSensors::CLIFFRIGHTSIGNAL);
         cout << "Valor: " << +sensor_value << endl;
@@ -120,64 +122,40 @@ int main(int argc, char** argv) {
     }
     cout << "Media RIGHT: " << + (media/5) << endl;*/
     
-    int i = 0;
-    
+	/*3.3. Calibración del sensor de distancia a la pared (Wall):*/
+	
+    int i = 0;    
     while(i < 40) {
         sensor_value = robot.updateSensor(iRobotSensors::WALL);
         cout << "Valor WALL: " << +sensor_value << endl;
         i++;
         delay(500);
-    }
-    
-// Comprobamos el estado del sensor CLIFFLEFT
-/*    int i=0;
-    int cintaMin=900, cintaMax=0, cintaSum=0, cintaCont=0, baldoMin=90000, baldoMax=0, baldoSum=0, baldoCont=0;
-    cout << "Comprobar el estado del sensor CLIFF LEFT en 2 seg" << endl;
-    delay(2000);
-    int velocidad = 255;
-    robot.driveDirect(velocidad, velocidad);
-
-    while(i<30000){        
-        sensor_value = robot.updateSensor(iRobotSensors::CLIFFLEFTSIGNAL);
-        cout << "Valor: " << +sensor_value << endl;
-        i++;
-        
-        if(sensor_value < 500) {
-            cintaCont++;
-            cintaSum += sensor_value;
-            if(sensor_value < cintaMin) {
-                cintaMin = sensor_value;
-            }
-            
-            if(sensor_value > cintaMax) {
-                cintaMax = sensor_value;
-            }
-        } else {
-            baldoCont++;
-            baldoSum += sensor_value;
-            if(sensor_value < baldoMin) {
-                baldoMin = sensor_value;
-            }
-            
-            if(sensor_value > baldoMax) {
-                baldoMax = sensor_value;
-            }
-        }
-        
-        sensor_value2 = robot.updateSensor(iRobotSensors::BUMPERS_AND_WHEELDROPS);
-        
-        if(sensor_value2 > 0){
-            robot.driveDirect(0, 0);
-            cout << "CintaMin: " << +cintaMin << endl;
-            cout << "CintaMax: " << +cintaMax << endl;
-            cout << "CintaMed: " << + (cintaSum/cintaCont) << endl;
-            cout << "BaldoMin: " << +baldoMin << endl;
-            cout << "BaldoMax: " << +baldoMax << endl;
-            cout << "BaldoMed: " << + (baldoSum/baldoCont) << endl;
-            return(0);
-        }
-        
-    }*/
+    } 
+	
+	/*3.4. Calibración de sensores de distancia para Dead-Reckoning*/
+	int distancia = (int)argv[0];
+	char direccion = argv[1]; 	//d = derecha; i = izquierda
+	
+	int i = 0;
+	while (i < 4) {	//4 giros	
+		//waitDistance() es uno de los métodos críticos; se intentará hacerlo de otro modo
+		robot.driveDirect(200, 200); //avanzar
+		int dr = 0;	//distancia recorrida		
+		while (dr < distancia) { //hasta recorrer la distancia...
+			dr += robot.updateSensor(iRobotSensors::DISTANCE);
+		}
+		if(direccion=='d'){
+			robot.driveDirect(200, -200); //girar hacia la derecha
+		} else {
+			robot.driveDirect(-200, 200); //girar hacia la izquierda
+		}
+		int ar = 0;	//ángulo recorrido		
+		while (ar < 90) { //hasta girar del todo
+			dr += robot.updateSensor(iRobotSensors::ANGLE);
+		}
+		robot.driveDirect(0, 0); //parar
+		i++;
+	}
     
     return EXIT_SUCCESS;
 }
