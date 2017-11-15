@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     robot.full();
     //delay(500);
 
-    // Comprobamos el estado del sensor BUMPERS y WHEELDROPS
+    // 3.1. Calibración de sensores de choque y caída de ruedas (Bumps & WheelDrops)
     /*int i= 0;
     cout << "Comprobar el estado del sensor choque y caida de ruedas en 2 seg" << endl;
     delay(2000);
@@ -67,17 +67,8 @@ int main(int argc, char** argv) {
         delay(1000);
     }*/
     
-    /*int i = 0;
-    
-    while(i<40) {
-        sensor_value = robot.updateSensor(iRobotSensors::CLIFFRIGHTSIGNAL);
-        cout << "Valor: " << +sensor_value << endl;
-        i++;
-        delay(1000);
-    }*/
-    
-    
-   /* int i = 0, media = 0;
+    // 3.2. Calibración de sensores de barranco ( Cliffs Signal )
+    int i = 0, media = 0;
     
     while(i<5) {
         sensor_value = robot.updateSensor(iRobotSensors::CLIFFLEFTSIGNAL);
@@ -119,66 +110,8 @@ int main(int argc, char** argv) {
         media += sensor_value;
         delay(1000);
     }
-    cout << "Media RIGHT: " << + (media/5) << endl;*/
-    
-   /* int i = 0;
-    
-    while(i < 100) {
-        sensor_value = robot.updateSensor(iRobotSensors::WALLSIGNAL);
-        cout << "Valor WALL: " << +sensor_value << endl;
-        i++;
-        delay(500);
-    }*/
-    
-// Comprobamos el estado del sensor CLIFFLEFT
-/*    int i=0;
-    int cintaMin=900, cintaMax=0, cintaSum=0, cintaCont=0, baldoMin=90000, baldoMax=0, baldoSum=0, baldoCont=0;
-    cout << "Comprobar el estado del sensor CLIFF LEFT en 2 seg" << endl;
-    delay(2000);
-    int velocidad = 255;
-    robot.driveDirect(velocidad, velocidad);
-
-    while(i<30000){        
-        sensor_value = robot.updateSensor(iRobotSensors::CLIFFLEFTSIGNAL);
-        cout << "Valor: " << +sensor_value << endl;
-        i++;
-        
-        if(sensor_value < 500) {
-            cintaCont++;
-            cintaSum += sensor_value;
-            if(sensor_value < cintaMin) {
-                cintaMin = sensor_value;
-            }
-            
-            if(sensor_value > cintaMax) {
-                cintaMax = sensor_value;
-            }
-        } else {
-            baldoCont++;
-            baldoSum += sensor_value;
-            if(sensor_value < baldoMin) {
-                baldoMin = sensor_value;
-            }
-            
-            if(sensor_value > baldoMax) {
-                baldoMax = sensor_value;
-            }
-        }
-        
-        sensor_value2 = robot.updateSensor(iRobotSensors::BUMPERS_AND_WHEELDROPS);
-        
-        if(sensor_value2 > 0){
-            robot.driveDirect(0, 0);
-            cout << "CintaMin: " << +cintaMin << endl;
-            cout << "CintaMax: " << +cintaMax << endl;
-            cout << "CintaMed: " << + (cintaSum/cintaCont) << endl;
-            cout << "BaldoMin: " << +baldoMin << endl;
-            cout << "BaldoMax: " << +baldoMax << endl;
-            cout << "BaldoMed: " << + (baldoSum/baldoCont) << endl;
-            return(0);
-        }
-        
-    }*/
+    cout << "Media RIGHT: " << + (media/5) << endl;
+       
     
     /*3.3. Calibración del sensor de distancia a la pared (Wall):*/
 	
