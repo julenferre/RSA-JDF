@@ -133,18 +133,20 @@ int main(int argc, char** argv) {
 	while (i < 4) {	//4 giros	
 		//waitDistance() es uno de los métodos críticos; se intentará hacerlo de otro modo
 		robot.driveDirect(velAvance, velAvance); //avanzar
-		int dr = 0;	//distancia recorrida		
+		int dr = 0;	//distancia recorrida
+		robot.updateSensor(iRobotSensors::DISTANCE);		
 		while (dr < distancia) { //hasta recorrer la distancia...
 			dr += robot.updateSensor(iRobotSensors::DISTANCE);
 			cout << "Valor DISTANCE: " << +dr << endl;
 		}
 		int ar = 0;
 		int ang = 0;
+		robot.updateSensoruierd(iRobotSensors::ANGLE);
 		if(strcmp(direccion,"d")==0){ //derecha
 			robot.driveDirect(-velGiro, velGiro); //girar hacia la derecha                        
 			while (ar < 90) { //hasta girar del todo
 				//65536	 = 2^16 (16 bits) // Al girar a la derecha, el sensor de angle devuelve 65534
-				ang = robot.updateSensor(iRobotSensors::ANGLE);
+				ang = robot.updateSensoruierd(iRobotSensors::ANGLE);
 				ar += (65536 - ang);
 				cout << "Valor acumulado: " << +ar << endl;
 			}
