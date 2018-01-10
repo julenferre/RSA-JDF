@@ -51,7 +51,7 @@ private:
     struct robot iCreate;
 
     struct camino *path;
-    struct camino *first; // primer elemento de la lista
+    struct camino *primero; // primer elemento de la lista
 
     // M�todos de uso interno para cargar el XML y rellenar la matriz de nodos
     void cargarLaberinto(const char* pFilename);
@@ -64,12 +64,12 @@ private:
     // Actualiza el recorrido del robot en el laberinto
     void modificarCamino(robot *aux);
 
-    bool visitado(nodo *proximo, camino *first_visited);
+    bool visitado(nodo *proximo, camino *primero);
 
     // A�ade un nodo nuevo a un camino
     void modificarCamino(camino** cam, nodo **aux);
     
-    bool fRecursiva( int x_dest, int y_dest, nodo *actual, camino *solucion, camino *visitados, camino *primerVisitado);
+    bool encontrarCaminoRecursivo( int x_dest, int y_dest, nodo *actual, camino *solucion, camino *visitados, camino *primerVisitado);
     
     camino* eliminarNodosSobrantes(camino* aux);
 
@@ -88,28 +88,27 @@ public:
 
     // Devuelve la posicion del robot y su orientacion
     void getPosRobot(int *pos_x, int *pos_y, char * orientacion);
+    
+    // Modificar el mapa
+    void quitarCalle(nodo **nodoCambiar, int orientacion);
 
-    // M�todos para consultar si el robot puede avanzar en una direcci�n
     bool esSurLibre();
     bool esNorteLibre();
     bool esEsteLibre();
     bool esOesteLibre();
 
-    // M�todos para cambiar la orientaci�n del robot en el laberinto
     void orientarRobotNorte();
     void orientarRobotSur();
     void orientarRobotEste();
     void orientarRobotOeste();
 
-    // M�todos para mover el robot en el laberinto
     int avanzaNorte();
     int avanzaSur();
     int avanzaEste();
     int avanzaOeste();
 
-    // M�todos para visualizar la informaci�n del laberinto
     void imprimirLaberinto();
-    void imprimirCamino(camino *first_element);
+    void imprimirCamino(camino *primero);
     void imprimirCaminoRobot();
 
 };

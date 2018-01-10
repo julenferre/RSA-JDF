@@ -15,11 +15,11 @@ Laberinto::Laberinto(void) {
     situarRobot(0, 0, SUR);
 
     path = (struct camino *) malloc(sizeof (camino));
-    first = (struct camino *) malloc(sizeof (camino));
+    primero = (struct camino *) malloc(sizeof (camino));
     path->nodo_actual = iCreate.nodo_actual;
     path->anterior = NULL;
     path->siguiente = NULL;
-    first = path;
+    primero = path;
 }
 
 /**
@@ -31,11 +31,11 @@ Laberinto::Laberinto(const char* pFilename) {
     situarRobot(0, 0, SUR);
 
     path = (struct camino *) malloc(sizeof (camino));
-    first = (struct camino *) malloc(sizeof (camino));
+    primero = (struct camino *) malloc(sizeof (camino));
     path->nodo_actual = iCreate.nodo_actual;
     path->anterior = NULL;
     path->siguiente = NULL;
-    first = path;
+    primero = path;
     cRobot.inicializacion();
 }
 
@@ -51,11 +51,11 @@ Laberinto::Laberinto(const char* pFilename, int x, int y, char orientacion) {
     situarRobot(x, y, orientacion);
 
     path = (struct camino *) malloc(sizeof (camino));
-    first = (struct camino *) malloc(sizeof (camino));
+    primero = (struct camino *) malloc(sizeof (camino));
     path->nodo_actual = iCreate.nodo_actual;
     path->anterior = NULL;
     path->siguiente = NULL;
-    first = path;
+    primero = path;
 }
 
 /**
@@ -320,7 +320,7 @@ void Laberinto::modificarCamino(robot *aux) {
 void Laberinto::imprimirCaminoRobot() {
 
     struct camino * aux; // = (struct camino *) malloc (sizeof(camino));
-    aux = first;
+    aux = primero;
 
     cout << "imprimiendo el camino: " << endl;
     cout << "[" << aux->nodo_actual->x << "," << aux->nodo_actual->y << "] ";
@@ -341,10 +341,11 @@ int Laberinto::avanzaNorte() {
         orientarRobotNorte();
         iCreate.nodo_actual = iCreate.nodo_actual->Norte;
 
-        cRobot.avanzar();
+        int resultado = cRobot.avanzar();
+        if(resultado == 0) return resultado;
         modificarCamino(&iCreate);
 
-        return 0;
+        return 1;
     } else {
         return -1;
     }
@@ -359,10 +360,11 @@ int Laberinto::avanzaSur() {
         orientarRobotSur();
         iCreate.nodo_actual = iCreate.nodo_actual->Sur;
 
-        cRobot.avanzar();
+        int resultado = cRobot.avanzar();
+        if(resultado == 0) return resultado;
         modificarCamino(&iCreate);
 
-        return 0;
+        return 1;
     } else {
         return -1;
     }
@@ -377,10 +379,11 @@ int Laberinto::avanzaEste() {
         orientarRobotEste();
         iCreate.nodo_actual = iCreate.nodo_actual->Este;
 
-        cRobot.avanzar();
+        int resultado = cRobot.avanzar();
+        if(resultado == 0) return resultado;
         modificarCamino(&iCreate);
 
-        return 0;
+        return 1;
     } else {
         return -1;
     }
@@ -395,10 +398,12 @@ int Laberinto::avanzaOeste() {
         orientarRobotOeste();
         iCreate.nodo_actual = iCreate.nodo_actual->Oeste;
 
-        cRobot.avanzar();
+        int resultado = cRobot.avanzar();
+        if(resultado == 0) return resultado;
+        
         modificarCamino(&iCreate);
 
-        return 0;
+        return 1;
     } else {
         return -1;
     }
@@ -542,11 +547,11 @@ camino* Laberinto::encontrarCamino(int x_orig, int y_orig, int x_dest, int y_des
     inicioSolucion = solucion;
     bool fin = false;
 
-    fin = fRecursiva(x_dest, y_dest, first, solucion, visitados, inicioVisitado);
+    fin = encontrarCaminoRecursivo(x_dest, y_dest, first, solucion, visitados, inicioVisitado);
     if (fin) {
         eliminarNodosSobrantes(inicioSolucion);
-        //imprimirCamino(inicioSolucion);
-        //imprimirCamino(inicioVisitado);
+        imprimirCamino(inicioSolucion);
+        imprimirCamino(inicioVisitado);
     }
     
     return inicioSolucion;
@@ -556,7 +561,7 @@ camino* Laberinto::encontrarCamino(int x_orig, int y_orig, int x_dest, int y_des
 /**
  *      Función recursiva para recorrer el laberinto hasta encontrar la salida
  */
-bool Laberinto::fRecursiva(int x_dest, int y_dest, nodo *actual, camino *solucion, camino *visitados, camino *inicioVisitado) {
+bool Laberinto::encontrarCaminoRecursivo(int x_dest, int y_dest, nodo *actual, camino *solucion, camino *visitados, camino *inicioVisitado) {
 
     struct nodo* copia = actual;
 
@@ -572,7 +577,7 @@ bool Laberinto::fRecursiva(int x_dest, int y_dest, nodo *actual, camino *solucio
         if (!visitado(actual->Sur, inicioVisitado)) {//si no se ha visitado antes
             modificarCamino(&solucion, &copia);
             modificarCamino(&visitados, &copia);
-            fin = fRecursiva(x_dest, y_dest, actual->Sur, solucion, visitados, inicioVisitado);
+            fin = encontrarCaminoRecursivo(x_dest, y_dest, actual->Sur, solucion, visitados, inicioVisitado);
             if (fin) return true;
         }
     }
@@ -581,7 +586,7 @@ bool Laberinto::fRecursiva(int x_dest, int y_dest, nodo *actual, camino *solucio
         if (!visitado(actual->Norte, inicioVisitado)) {//si no se ha visitado antes
             modificarCamino(&solucion, &copia);
             modificarCamino(&visitados, &copia);
-            fin = fRecursiva(x_dest, y_dest, actual->Norte, solucion, visitados, inicioVisitado);
+            fin = encontrarCaminoRecursivo(x_dest, y_dest, actual->Norte, solucion, visitados, inicioVisitado);
             if (fin) return true;
         }
     }
@@ -590,7 +595,7 @@ bool Laberinto::fRecursiva(int x_dest, int y_dest, nodo *actual, camino *solucio
         if (!visitado(actual->Este, inicioVisitado)) {//si no se ha visitado antes
             modificarCamino(&solucion, &copia);
             modificarCamino(&visitados, &copia);
-            fin = fRecursiva(x_dest, y_dest, actual->Este, solucion, visitados, inicioVisitado);
+            fin = encontrarCaminoRecursivo(x_dest, y_dest, actual->Este, solucion, visitados, inicioVisitado);
             if (fin) return true;
         }
     }
@@ -599,7 +604,7 @@ bool Laberinto::fRecursiva(int x_dest, int y_dest, nodo *actual, camino *solucio
         if (!visitado(actual->Oeste, inicioVisitado)) {//si no se ha visitado antes
             modificarCamino(&solucion, &copia);
             modificarCamino(&visitados, &copia);
-            fin = fRecursiva(x_dest, y_dest, actual->Oeste, solucion, visitados, inicioVisitado);
+            fin = encontrarCaminoRecursivo(x_dest, y_dest, actual->Oeste, solucion, visitados, inicioVisitado);
             if (fin) return true;
         }
     }
@@ -636,6 +641,32 @@ void Laberinto::modificarCamino(camino** cam, nodo **aux) {
 
     (*cam)->siguiente = siguiente;
     *cam = siguiente;
+}
+
+/**
+ *      Función para modificar el mapa almacenado en la memoria después
+ *      de encontrar una calle cortada.
+ *              x : Coordenadas del nodo - x
+ *              y : Coordenadas del nodo - y
+ *              orientacion : direccion del choque
+ */
+void Laberinto::quitarCalle(nodo **nodoCambiar, int orientacion) {
+    struct nodo *aux = (struct nodo *) malloc(sizeof (nodoCambiar));
+    aux = *nodoCambiar; 
+    switch (orientacion) {
+        case NORTE:
+            aux->Norte = NULL;
+            break;
+        case SUR:
+            aux->Sur = NULL;
+            break;
+        case ESTE:
+            aux->Este = NULL;
+            break;
+        case OESTE:
+            aux->Oeste = NULL;
+            break;
+    }
 }
 
 /**

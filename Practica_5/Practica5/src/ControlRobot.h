@@ -17,8 +17,8 @@ class ControlRobot {
     	struct Sensores_iCreate {
     		// variables para almacenar informaci�n del 
     		// sensor de acantilado frontal izquierdo
-			unsigned int front_left, front_right, left, right, advance_button;
-			bool fl,fr, l, r;
+			unsigned int front_left, front_right, left, right, advance_button, bumper;
+			bool fl,fr, l, r, bp;
 		};
 		struct Sensores_iCreate sensores;
 		
@@ -47,10 +47,11 @@ class ControlRobot {
     	void leerSensores();
     	void logicaEstados();
     	void moverActuadores();
+        bool nodoAlcanzado();
     	void imprimirInfo();
     	void finalizacion();
         
-        void avanzar();
+        int avanzar();
         void girarD();
         void girarI();
         void vuelta();
